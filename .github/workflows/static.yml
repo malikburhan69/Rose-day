@@ -1,0 +1,88 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>untoldcoding</title>
+    <link rel="stylesheet" href="new.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>For You 💖</h1>
+      <div class="postcard1"></div>
+      <div class="postcard">
+        <div class="letter"></div>
+        <p>
+          <span>My Love,</span>
+          <br />
+          On this Rose Day, each petal symbolizes my admiration <br />for you.
+          Your presence colors my world with joy and warmth.Like a rose in full
+          bloom, your beauty captivates my heart. The red roses reflect the
+          passion that burns for you, while the white ones signify the purity of
+          our love. In the garden of life, you're my most cherished blossom.
+          Thank you for being my source of love and inspiration. Our journey
+          together is as sweet as the fragrance of roses. Happy Rose Day, my
+          love. Here's to many more petals of shared laughter and enduring love.
+          <br />
+          <span class="ullu">
+            Forever Yours,
+            <br />
+            Ullu</span
+          >
+        </p>
+        <div class="address">
+          <img
+            src="https://i.postimg.cc/9Xq7XyF2/Untold-Coding.png"
+            class="mail_stamp"
+          />
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>crafted by @untoldcoding.</p>
+    </footer>
+  </body>
+</html>  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
